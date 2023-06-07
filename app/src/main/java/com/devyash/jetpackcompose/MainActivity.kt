@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
@@ -133,6 +134,26 @@ private fun columnsAndRows() {
     }
 }
 
+@Composable
+private fun usersChat() {
+    Row(Modifier.padding(8.dp)) {
+        Image(
+            painter = painterResource(id = R.drawable.baseline_chat_24),
+            contentDescription = "Chat Image",
+            Modifier.size(50.dp)
+        )
+
+        Column(Modifier.padding(5.dp)) {
+            Text(
+                text = "Yashveer Singh", fontSize = 16.sp,
+                fontWeight = FontWeight.Bold
+            )
+            Text(text = "Hi, Yash how are you? Hope you are good.",
+            color = Color.Gray)
+        }
+    }
+}
+
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun Preview() {
@@ -143,5 +164,6 @@ fun Preview() {
 //    ButtonTesting()
 
 //    textField("Hello")
-    columnsAndRows()
+//    columnsAndRows()
+    usersChat()
 }
