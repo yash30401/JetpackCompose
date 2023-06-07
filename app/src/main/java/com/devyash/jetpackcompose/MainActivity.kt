@@ -6,6 +6,8 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
@@ -20,6 +22,7 @@ import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
@@ -38,7 +41,8 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Greeting("Android")
+//            Greeting("Android")
+            textField(value = "")
         }
 
     }
@@ -94,6 +98,18 @@ private fun textField(value: String) {
     )
 }
 
+@Composable
+private fun columnsAndRows() {
+    Row(
+        horizontalArrangement = Arrangement.SpaceEvenly,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(text = "Hello World!")
+        Text(text = "Hello Yash!")
+    }
+
+}
+
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun Preview() {
@@ -103,5 +119,6 @@ fun Preview() {
 
 //    ButtonTesting()
 
-    textField("Hello")
+//    textField("Hello")
+    columnsAndRows()
 }
