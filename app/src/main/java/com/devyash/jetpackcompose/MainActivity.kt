@@ -7,10 +7,12 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -115,6 +117,19 @@ private fun columnsAndRows() {
     ) {
         Text(text = "Hello World!")
         Text(text = "Hello Yash!")
+    }
+
+    Box(contentAlignment = Alignment.Center) {
+        Image(
+            painter = painterResource(id = R.drawable.baseline_chat_24),
+            contentDescription = "Chat Image",
+            Modifier.size(100.dp)
+        )
+        Image(
+            painter = painterResource(id = R.drawable.ic_launcher_background),
+            contentDescription = "Chat Image",
+            Modifier.size(50.dp)
+        )
     }
 }
 
