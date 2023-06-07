@@ -140,7 +140,7 @@ private fun usersChat() {
         Image(
             painter = painterResource(id = R.drawable.baseline_chat_24),
             contentDescription = "Chat Image",
-            Modifier.size(50.dp)
+            modifier = Modifier.size(50.dp)
         )
 
         Column(Modifier.padding(5.dp)) {
