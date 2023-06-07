@@ -7,6 +7,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -108,6 +109,13 @@ private fun columnsAndRows() {
         Text(text = "Hello Yash!")
     }
 
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceAround
+    ) {
+        Text(text = "Hello World!")
+        Text(text = "Hello Yash!")
+    }
 }
 
 @Preview(showBackground = true, showSystemUi = true)
