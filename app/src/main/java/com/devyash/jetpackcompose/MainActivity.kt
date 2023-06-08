@@ -15,6 +15,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ButtonElevation
@@ -49,11 +51,12 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
 //            Greeting("Android")
-            cardInCompose(
-                R.drawable.baseline_chat_24,
-                "Yashveer Singh",
-                "Hello, Yash how are you?"
-            )
+//            cardInCompose(
+//                R.drawable.baseline_chat_24,
+//                "Yashveer Singh",
+//                "Hello, Yash how are you?"
+//            )
+            lazyColumns()
         }
 
     }
@@ -193,6 +196,15 @@ private fun cardInCompose(img: Int, title: String, subtitle: String) {
     }
 }
 
+@Composable
+private fun lazyColumns(){
+    LazyColumn(content = {
+        items(getCategoryList()){item->
+            cardInCompose(img = item.img, title = item.title, subtitle = item.subtitle)
+        }
+    })
+}
+
 @Preview(showBackground = true)
 @Composable
 fun Preview() {
@@ -206,9 +218,24 @@ fun Preview() {
 //    columnsAndRows()
 //    usersChat()
 
-    cardInCompose(
-        R.drawable.baseline_chat_24,
-        "Yashveer Singh",
-        "Hello, Yash how are you?"
-    )
+//    cardInCompose(
+//        R.drawable.baseline_chat_24,
+//        "Yashveer Singh",
+//        "Hello, Yash how are you?"
+//    )
+    lazyColumns()
+}
+
+data class Category(val img: Int, val title: String, val subtitle:String)
+
+fun getCategoryList():MutableList<Category>{
+    val list = mutableListOf<Category>()
+    list.add(Category(R.drawable.baseline_chat_24,"Yashveer Singh","Hellow, yash how are you?"))
+    list.add(Category(R.drawable.baseline_build_24,"Mohit","Hellow, Mohit how are you?"))
+    list.add(Category(R.drawable.baseline_call_to_action_24,"Rajat","Hellow, Rajat how are you?"))
+    list.add(Category(R.drawable.baseline_camera_rear_24,"Himanshu","Hellow, Himanshu how are you?"))
+    list.add(Category(R.drawable.baseline_casino_24,"Mahan","Hellow, Mahan how are you?"))
+    list.add(Category(R.drawable.baseline_center_focus_strong_24,"Bhavik","Hellow, Bhavik how are you?"))
+
+    return list
 }
