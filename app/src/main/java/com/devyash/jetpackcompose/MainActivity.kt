@@ -18,6 +18,9 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ButtonElevation
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardElevation
+import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -46,7 +49,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
 //            Greeting("Android")
-            textField(value = "")
+            cardInCompose(
+                R.drawable.baseline_chat_24,
+                "Yashveer Singh",
+                "Hello, Yash how are you?"
+            )
         }
 
     }
@@ -148,13 +155,45 @@ private fun usersChat() {
                 text = "Yashveer Singh", fontSize = 16.sp,
                 fontWeight = FontWeight.Bold
             )
-            Text(text = "Hi, Yash how are you? Hope you are good.",
-            color = Color.Gray)
+            Text(
+                text = "Hi, Yash how are you? Hope you are good.",
+                color = Color.Gray
+            )
         }
     }
 }
 
-@Preview(showBackground = true, showSystemUi = true)
+@Composable
+private fun cardInCompose(img: Int, title: String, subtitle: String) {
+    Card(modifier = Modifier.padding(8.dp)) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.padding(8.dp)
+        ) {
+            Image(
+                painter = painterResource(id = img),
+                contentDescription = "Testing",
+                modifier = Modifier
+                    .size(48.dp)
+                    .padding(8.dp)
+                    .weight(.2f)
+            )
+            Column(modifier = Modifier.weight(.8f)) {
+                Text(
+                    text = "$title",
+                    style = MaterialTheme.typography.headlineSmall
+                )
+                Text(
+                    text = "$subtitle",
+                    style = MaterialTheme.typography.labelSmall,
+                    fontWeight = FontWeight.Thin
+                )
+            }
+        }
+    }
+}
+
+@Preview(showBackground = true)
 @Composable
 fun Preview() {
     /*  Greeting("Android")
@@ -165,5 +204,11 @@ fun Preview() {
 
 //    textField("Hello")
 //    columnsAndRows()
-    usersChat()
+//    usersChat()
+
+    cardInCompose(
+        R.drawable.baseline_chat_24,
+        "Yashveer Singh",
+        "Hello, Yash how are you?"
+    )
 }
