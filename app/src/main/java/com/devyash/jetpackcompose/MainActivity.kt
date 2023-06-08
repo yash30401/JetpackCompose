@@ -236,6 +236,18 @@ fun getCategoryList():MutableList<Category>{
     list.add(Category(R.drawable.baseline_camera_rear_24,"Himanshu","Hellow, Himanshu how are you?"))
     list.add(Category(R.drawable.baseline_casino_24,"Mahan","Hellow, Mahan how are you?"))
     list.add(Category(R.drawable.baseline_center_focus_strong_24,"Bhavik","Hellow, Bhavik how are you?"))
+    list.add(Category(R.drawable.baseline_chat_24,"Yashveer Singh","Hellow, yash how are you?"))
+    list.add(Category(R.drawable.baseline_build_24,"Mohit","Hellow, Mohit how are you?"))
+    list.add(Category(R.drawable.baseline_call_to_action_24,"Rajat","Hellow, Rajat how are you?"))
+    list.add(Category(R.drawable.baseline_camera_rear_24,"Himanshu","Hellow, Himanshu how are you?"))
+    list.add(Category(R.drawable.baseline_casino_24,"Mahan","Hellow, Mahan how are you?"))
+    list.add(Category(R.drawable.baseline_center_focus_strong_24,"Bhavik","Hellow, Bhavik how are you?"))
+    list.add(Category(R.drawable.baseline_chat_24,"Yashveer Singh","Hellow, yash how are you?"))
+    list.add(Category(R.drawable.baseline_build_24,"Mohit","Hellow, Mohit how are you?"))
+    list.add(Category(R.drawable.baseline_call_to_action_24,"Rajat","Hellow, Rajat how are you?"))
+    list.add(Category(R.drawable.baseline_camera_rear_24,"Himanshu","Hellow, Himanshu how are you?"))
+    list.add(Category(R.drawable.baseline_casino_24,"Mahan","Hellow, Mahan how are you?"))
+    list.add(Category(R.drawable.baseline_center_focus_strong_24,"Bhavik","Hellow, Bhavik how are you?"))
 
     return list
 }
