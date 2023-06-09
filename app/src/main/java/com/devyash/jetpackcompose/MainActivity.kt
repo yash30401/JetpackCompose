@@ -1,8 +1,6 @@
 package com.devyash.jetpackcompose
 
-import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
@@ -17,15 +15,13 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ButtonElevation
 import androidx.compose.material3.Card
-import androidx.compose.material3.CardElevation
-import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -36,16 +32,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.devyash.jetpackcompose.ui.theme.JetpackComposeTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,12 +51,14 @@ class MainActivity : ComponentActivity() {
 //                "Hello, Yash how are you?"
 //            )
 //            lazyColumns()
+            var count = rememberSaveable { mutableStateOf(0) }
             Column(
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.fillMaxSize(1f)
             ) {
-                NotificationCounter()
+                NotificationCounter(count.value,{ count.value++ })
+                MessageBar(count.value)
             }
 
         }
@@ -216,15 +211,30 @@ private fun lazyColumns() {
 }
 
 @Composable
-private fun NotificationCounter() {
-    var count = rememberSaveable{ mutableStateOf(0) }
+private fun MessageBar(count: Int) {
+    Card() {
+        Row(Modifier.padding(8.dp), verticalAlignment = Alignment.CenterVertically) {
+            Image(
+                imageVector = Icons.Outlined.Favorite,
+                contentDescription = "",
+                Modifier.padding(4.dp)
+            )
+            Text(text = "Message sent so far -$count")
+        }
+    }
+}
+
+@Composable
+private fun NotificationCounter(count: Int, increment: () -> Unit) {
+
     Column(verticalArrangement = Arrangement.Center) {
-        Text(text = "You have sent ${count.value} Notifications")
-        Button(onClick = { count.value++ }) {
+        Text(text = "You have sent ${count} Notifications")
+        Button(onClick = { increment() }) {
             Text(text = "Send Notification")
         }
     }
 }
+
 
 @Preview(showBackground = true)
 @Composable
@@ -246,7 +256,7 @@ fun Preview() {
 //    )
 //    lazyColumns()
 
-    NotificationCounter()
+//    NotificationCounter(count.value) { count.value++ }
 }
 
 
