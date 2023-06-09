@@ -31,6 +31,7 @@ import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -216,7 +217,7 @@ private fun lazyColumns() {
 
 @Composable
 private fun NotificationCounter() {
-    var count = remember { mutableStateOf(0) }
+    var count = rememberSaveable{ mutableStateOf(0) }
     Column(verticalArrangement = Arrangement.Center) {
         Text(text = "You have sent ${count.value} Notifications")
         Button(onClick = { count.value++ }) {
