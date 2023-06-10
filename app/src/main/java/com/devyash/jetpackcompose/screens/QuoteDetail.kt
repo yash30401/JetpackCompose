@@ -1,5 +1,6 @@
 package com.devyash.jetpackcompose.screens
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -25,11 +26,15 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.devyash.jetpackcompose.DataManager
 import com.devyash.jetpackcompose.R
 import com.devyash.jetpackcompose.models.Quote
 
 @Composable
 fun QuoteDetail(quote: Quote) {
+    BackHandler {
+        DataManager.switchPages(null)
+    }
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier

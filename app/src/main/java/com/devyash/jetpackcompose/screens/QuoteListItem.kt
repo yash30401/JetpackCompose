@@ -37,12 +37,12 @@ import com.devyash.jetpackcompose.ui.theme.Grey
 
 
 @Composable
-fun QuoteListItem(quote: Quote, onClick: () -> Unit) {
+fun QuoteListItem(quote: Quote, onClick: (quote:Quote) -> Unit) {
     Card(
         elevation = CardDefaults.cardElevation(3.dp),
         modifier = Modifier
             .clickable {
-                onClick()
+                onClick(quote)
             }
             .padding(8.dp)
     ) {
@@ -59,7 +59,7 @@ fun QuoteListItem(quote: Quote, onClick: () -> Unit) {
             Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = "${quote.text}",
-                    style = MaterialTheme.typography.bodyMedium,
+                    style = MaterialTheme.typography.bodyLarge,
                     modifier = Modifier.padding(0.dp, 0.dp, 0.dp, 8.dp),
                     fontWeight = FontWeight.SemiBold
                 )
@@ -70,7 +70,7 @@ fun QuoteListItem(quote: Quote, onClick: () -> Unit) {
                         .height(1.dp)
                 ) {
                 }
-                Text(text = "${quote.author}", Modifier.padding(4.dp), fontWeight = FontWeight.Thin)
+                Text(text = "${quote.author}", Modifier.padding(4.dp), fontWeight = FontWeight.Normal)
             }
         }
     }

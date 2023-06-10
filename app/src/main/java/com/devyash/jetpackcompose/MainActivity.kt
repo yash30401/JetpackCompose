@@ -39,6 +39,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.devyash.jetpackcompose.screens.QuoteDetail
+import com.devyash.jetpackcompose.screens.QuoteListScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,8 +62,8 @@ class MainActivity : ComponentActivity() {
 //                NotificationCounter(count.value,{ count.value++ })
 //                MessageBar(count.value)
 //            }
-
-
+            DataManager.loadAssetsFromFile(this)
+            App()
 
         }
 
@@ -69,8 +71,27 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@Composable
+fun App() {
+    if (DataManager.isDataLoaded.value) {
+        if (DataManager.currentPage.value == Pages.LISTING) {
+            QuoteListScreen(data = DataManager.data) {
+                DataManager.switchPages(it)
+            }
+        } else {
+            DataManager.currentQuote?.let { QuoteDetail(quote = it) }
+        }
+    }else{
+        Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize(1f)) {
+            Text(text = "Loading....", style = MaterialTheme.typography.bodyMedium)
+        }
+    }
+}
 
-
+enum class Pages {
+    LISTING,
+    DETAIL
+}
 
 data class Category(val img: Int, val title: String, val subtitle: String)
 
