@@ -110,7 +110,7 @@ private fun QuoteDetail() {
                     fontFamily = FontFamily(Font(R.font.poppins_medium_italic))
                 )
                 Spacer(modifier = Modifier.height(16.dp))
-                Text(text = "Theofrastus", Modifier.padding(4.dp), fontWeight = FontWeight.Thin)
+                Text(text = "Theofrastus", Modifier.padding(4.dp), fontWeight = FontWeight.Normal)
             }
 
         }
