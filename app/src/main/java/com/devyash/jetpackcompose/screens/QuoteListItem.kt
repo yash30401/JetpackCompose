@@ -2,6 +2,7 @@ package com.devyash.jetpackcompose.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -31,14 +32,19 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.devyash.jetpackcompose.R
+import com.devyash.jetpackcompose.models.Quote
 import com.devyash.jetpackcompose.ui.theme.Grey
 
 
 @Composable
-fun QuoteListItem() {
+fun QuoteListItem(quote: Quote, onClick: () -> Unit) {
     Card(
         elevation = CardDefaults.cardElevation(3.dp),
-        modifier = Modifier.padding(8.dp)
+        modifier = Modifier
+            .clickable {
+                onClick()
+            }
+            .padding(8.dp)
     ) {
         Row(modifier = Modifier.padding(16.dp)) {
             Image(
@@ -52,7 +58,7 @@ fun QuoteListItem() {
             Spacer(modifier = Modifier.padding(4.dp))
             Column(modifier = Modifier.weight(1f)) {
                 Text(
-                    text = "Time is the most valuable thing a man can spend",
+                    text = "${quote.text}",
                     style = MaterialTheme.typography.bodyMedium,
                     modifier = Modifier.padding(0.dp, 0.dp, 0.dp, 8.dp),
                     fontWeight = FontWeight.SemiBold
@@ -64,7 +70,7 @@ fun QuoteListItem() {
                         .height(1.dp)
                 ) {
                 }
-                Text(text = "Theofrastus", Modifier.padding(4.dp), fontWeight = FontWeight.Thin)
+                Text(text = "${quote.author}", Modifier.padding(4.dp), fontWeight = FontWeight.Thin)
             }
         }
     }

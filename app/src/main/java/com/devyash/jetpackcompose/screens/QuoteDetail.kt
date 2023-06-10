@@ -26,9 +26,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.devyash.jetpackcompose.R
+import com.devyash.jetpackcompose.models.Quote
 
 @Composable
-private fun QuoteDetail() {
+fun QuoteDetail(quote: Quote) {
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier
@@ -61,12 +62,12 @@ private fun QuoteDetail() {
                         .size(80.dp)
                 )
                 Text(
-                    text = "Time is the most valuable thing a man can spend",
+                    text = quote.text,
                     fontSize = 20.sp,
                     fontFamily = FontFamily(Font(R.font.poppins_medium_italic))
                 )
                 Spacer(modifier = Modifier.height(16.dp))
-                Text(text = "Theofrastus", Modifier.padding(4.dp), fontWeight = FontWeight.Normal)
+                Text(text = quote.author, Modifier.padding(4.dp), fontWeight = FontWeight.Normal)
             }
 
         }
