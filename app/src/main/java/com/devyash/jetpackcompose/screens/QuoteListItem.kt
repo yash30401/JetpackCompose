@@ -25,6 +25,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.devyash.jetpackcompose.R
+import com.devyash.jetpackcompose.ui.theme.Grey
+
 
 @Preview
 @Composable
@@ -47,10 +49,12 @@ fun QuoteListItem() {
                 Text(
                     text = "Time is the most valuable thing a man can spend",
                     style = MaterialTheme.typography.bodyMedium,
-                    modifier = Modifier.padding(0.dp, 0.dp, 0.dp, 8.dp)
+                    modifier = Modifier.padding(0.dp, 0.dp, 0.dp, 8.dp),
+                    fontWeight = FontWeight.SemiBold
                 )
-            Box(modifier =Modifier.background(Color(0xFFEEEEEE))
-                .fillMaxWidth(.4f)
+            Box(modifier = Modifier
+                .background(Grey)
+                .fillMaxWidth(.8f)
                 .height(1.dp)) {
             }
                 Text(text = "Theofrastus", Modifier.padding(4.dp), fontWeight = FontWeight.Thin)
