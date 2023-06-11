@@ -62,13 +62,23 @@ class MainActivity : ComponentActivity() {
 //                NotificationCounter(count.value,{ count.value++ })
 //                MessageBar(count.value)
 //            }
-            DataManager.loadAssetsFromFile(this)
-            App()
+//            DataManager.loadAssetsFromFile(this)
+//            App()
+            
+            hasSideEffects()
 
         }
 
 
     }
+    
+}
+
+var counter = 0
+@Composable
+private fun hasSideEffects() {
+    counter++
+    Text(text = "Yash")
 }
 
 @Composable
