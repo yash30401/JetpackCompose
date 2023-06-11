@@ -65,17 +65,18 @@ class MainActivity : ComponentActivity() {
 //            }
 //            DataManager.loadAssetsFromFile(this)
 //            App()
-            
+
             hasSideEffects()
 
         }
 
 
     }
-    
+
 }
 
 var counter = 0
+
 @Composable
 private fun hasSideEffects() {
     counter++
@@ -83,16 +84,16 @@ private fun hasSideEffects() {
 }
 
 @Composable
-private fun listComposables(){
+private fun listComposables() {
     val categoryState = remember { mutableStateOf(emptyList<String>()) }
 
-   /* It will launch only First Time when the composable call
-   * It is good in scenarios when you want to do a network call and want to do One time Activity
-   * Key tells that how many time LaunchedEffect should execute */
-    LaunchedEffect(key1 = Unit){
+    /*It will launch only First Time when the composable call.
+    * It is good in scenarios when you want to do a network call and want to do One time Activity.
+    * If fetching takes time it will automaically call it on the background thread.*/
+    LaunchedEffect(key1 = Unit) {
         categoryState.value = fetchCategories()
     }
-    
+
     LazyColumn(content = {
         items(categoryState.value) {
             Text(text = it)
@@ -100,8 +101,8 @@ private fun listComposables(){
     })
 }
 
-private fun fetchCategories():List<String>{
-    return listOf("One","Two","Three")
+private fun fetchCategories(): List<String> {
+    return listOf("One", "Two", "Three")
 }
 
 @Composable
@@ -114,7 +115,7 @@ fun App() {
         } else {
             DataManager.currentQuote?.let { QuoteDetail(quote = it) }
         }
-    }else{
+    } else {
         Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize(1f)) {
             Text(text = "Loading....", style = MaterialTheme.typography.bodyMedium)
         }
