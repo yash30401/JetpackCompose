@@ -25,6 +25,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -79,6 +80,28 @@ var counter = 0
 private fun hasSideEffects() {
     counter++
     Text(text = "Yash")
+}
+
+@Composable
+private fun listComposables(){
+    val categoryState = remember { mutableStateOf(emptyList<String>()) }
+
+   /* It will launch only First Time when the composable call
+   * It is good in scenarios when you want to do a network call and want to do One time Activity
+   * Key tells that how many time LaunchedEffect should execute */
+    LaunchedEffect(key1 = Unit){
+        categoryState.value = fetchCategories()
+    }
+    
+    LazyColumn(content = {
+        items(categoryState.value) {
+            Text(text = it)
+        }
+    })
+}
+
+private fun fetchCategories():List<String>{
+    return listOf("One","Two","Three")
 }
 
 @Composable
