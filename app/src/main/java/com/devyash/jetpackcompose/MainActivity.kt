@@ -89,7 +89,12 @@ private fun listComposables() {
 
     /*It will launch only First Time when the composable call.
     * It is good in scenarios when you want to do a network call and want to do One time Activity.
-    * If fetching takes time it will automaically call it on the background thread.*/
+    * If fetching takes time it will automaically call it on the background thread.
+    * It will launch new coroutine and dispose the older one on configuration changes to get rid from memory leaks.
+    *
+    * PROBLEMS WITH LaunchEffect:-
+    * 1. It's a composable so it can only run inside a composable. For ex:- We can't use it inside a button's onClick() function.
+    * */
     LaunchedEffect(key1 = Unit) {
         categoryState.value = fetchCategories()
     }
