@@ -40,6 +40,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.devyash.jetpackcompose.screens.CoroutineScopeCompose
 import com.devyash.jetpackcompose.screens.QuoteDetail
 import com.devyash.jetpackcompose.screens.QuoteListScreen
 
@@ -66,8 +67,9 @@ class MainActivity : ComponentActivity() {
 //            DataManager.loadAssetsFromFile(this)
 //            App()
 
-            hasSideEffects()
+//            hasSideEffects()
 
+            CoroutineScopeCompose()
         }
 
 
