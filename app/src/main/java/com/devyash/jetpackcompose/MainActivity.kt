@@ -4,10 +4,16 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.ColorRes
+import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.AnimationSpec
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -211,12 +217,22 @@ private fun AnimateInCompose() {
     }
     val size by animateDpAsState(
         targetValue = sizeSate,
-        animationSpec = tween(durationMillis = 3000, delayMillis = 400, easing = LinearOutSlowInEasing)
+//        animationSpec = tween(durationMillis = 3000, delayMillis = 400, easing = LinearOutSlowInEasing)
+        animationSpec = spring(Spring.DampingRatioHighBouncy)
+    )
+    var infiniteTransition = rememberInfiniteTransition()
+    val color by infiniteTransition.animateColor(
+        initialValue = Color.Red,
+        targetValue =Color.Green,
+        animationSpec = infiniteRepeatable(
+            tween(2000),
+            repeatMode = RepeatMode.Reverse
+        )
     )
     Box(
         modifier = Modifier
             .size(size)
-            .background(Color.Red),
+            .background(color),
         contentAlignment = Alignment.Center
     ) {
         Button(onClick = {
