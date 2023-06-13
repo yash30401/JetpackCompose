@@ -3,7 +3,14 @@ package com.devyash.jetpackcompose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.ColorRes
+import androidx.compose.animation.core.AnimationSpec
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,9 +33,11 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -66,8 +75,8 @@ class MainActivity : ComponentActivity() {
 //            DataManager.loadAssetsFromFile(this)
 //            App()
 
-            hasSideEffects()
-
+//            hasSideEffects()
+            AnimateInCompose()
         }
 
 
@@ -192,4 +201,29 @@ fun getCategoryList(): MutableList<Category> {
     )
 
     return list
+}
+
+@Preview
+@Composable
+private fun AnimateInCompose() {
+    var sizeSate by remember {
+        mutableStateOf(200.dp)
+    }
+    val size by animateDpAsState(
+        targetValue = sizeSate,
+        animationSpec = tween(durationMillis = 3000, delayMillis = 400, easing = LinearOutSlowInEasing)
+    )
+    Box(
+        modifier = Modifier
+            .size(size)
+            .background(Color.Red),
+        contentAlignment = Alignment.Center
+    ) {
+        Button(onClick = {
+            sizeSate += 50.dp
+        }) {
+            Text(text = "Increase Size")
+        }
+
+    }
 }
