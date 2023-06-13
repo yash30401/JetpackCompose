@@ -11,10 +11,12 @@ import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -48,17 +50,24 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.DpSize
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.devyash.jetpackcompose.screens.QuoteDetail
 import com.devyash.jetpackcompose.screens.QuoteListScreen
 
+
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -82,7 +91,11 @@ class MainActivity : ComponentActivity() {
 //            App()
 
 //            hasSideEffects()
-            AnimateInCompose()
+//            AnimateInCompose()
+
+            Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
+                CircularProgressBar(.8f, 100, 28.sp, 50.dp, Color.Green, 8.dp, 1000, 100)
+            }
         }
 
 
@@ -209,7 +222,7 @@ fun getCategoryList(): MutableList<Category> {
     return list
 }
 
-@Preview
+
 @Composable
 private fun AnimateInCompose() {
     var sizeSate by remember {
@@ -223,7 +236,7 @@ private fun AnimateInCompose() {
     var infiniteTransition = rememberInfiniteTransition()
     val color by infiniteTransition.animateColor(
         initialValue = Color.Red,
-        targetValue =Color.Green,
+        targetValue = Color.Green,
         animationSpec = infiniteRepeatable(
             tween(2000),
             repeatMode = RepeatMode.Reverse
@@ -242,4 +255,52 @@ private fun AnimateInCompose() {
         }
 
     }
+}
+
+@Preview
+@Composable
+private fun CircularProgressBar(
+    percentage: Float = 0f,
+    number: Int = 0,
+    fontSize: TextUnit = 28.sp,
+    radius: Dp = 50.dp,
+    color: Color = Color.Green,
+    strokeWidth: Dp = 8.dp,
+    animDuration: Int = 1000,
+    animDelay: Int = 0
+) {
+
+    var animationPlayed by remember {
+        mutableStateOf(false)
+    }
+
+    val curPercentage = animateFloatAsState(
+        targetValue = if (animationPlayed) percentage else 0f,
+        animationSpec = tween(durationMillis = animDuration, delayMillis = animDelay)
+    )
+    LaunchedEffect(key1 = true) {
+        animationPlayed = true
+    }
+
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = Modifier.size(radius * 2f)
+    ) {
+        Canvas(modifier = Modifier.size(radius * 2f)) {
+            drawArc(
+                color = color,
+                startAngle = -90f,
+                sweepAngle = 360 * curPercentage.value,
+                useCenter = false,
+                style = Stroke(strokeWidth.toPx(), cap = StrokeCap.Round)
+            )
+        }
+        Text(
+            text = (curPercentage.value * number).toInt().toString(),
+            color = Color.Black,
+            fontSize = fontSize,
+            fontWeight = FontWeight.Bold
+        )
+    }
+
 }
