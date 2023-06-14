@@ -93,9 +93,11 @@ class MainActivity : ComponentActivity() {
 //            hasSideEffects()
 //            AnimateInCompose()
 
-            Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
-                CircularProgressBar(.8f, 100, 28.sp, 50.dp, Color.Green, 8.dp, 1000, 100)
-            }
+//            Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
+//                CircularProgressBar(.8f, 100, 28.sp, 50.dp, Color.Green, 8.dp, 1000, 100)
+//            }
+
+
         }
 
 
@@ -257,7 +259,6 @@ private fun AnimateInCompose() {
     }
 }
 
-@Preview
 @Composable
 private fun CircularProgressBar(
     percentage: Float = 0f,
@@ -304,3 +305,5 @@ private fun CircularProgressBar(
     }
 
 }
+
+
