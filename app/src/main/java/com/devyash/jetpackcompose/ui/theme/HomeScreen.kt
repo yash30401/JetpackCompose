@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -32,6 +33,7 @@ import com.devyash.jetpackcompose.R
 import com.devyash.jetpackcompose.ui.theme.ButtonBlue
 import com.devyash.jetpackcompose.ui.theme.DarkerButtonBlue
 import com.devyash.jetpackcompose.ui.theme.DeepBlue
+import com.devyash.jetpackcompose.ui.theme.LightRed
 import com.devyash.jetpackcompose.ui.theme.TextWhite
 
 @Preview
@@ -45,6 +47,7 @@ fun HomeScreen() {
         Column {
             GreetingSection()
             ChipSection(chips = listOf("Sweet Sleep", "Insomnia", "Depression"))
+            CurrentMeditation()
         }
     }
 }
@@ -109,7 +112,52 @@ fun ChipSection(chips: List<String>) {
 
 }
 
+@Composable
+fun CurrentMeditation(
+    color: Color = LightRed
+) {
 
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween,
+        modifier = Modifier
+            .padding(15.dp)
+            .clip(RoundedCornerShape(10.dp))
+            .padding(horizontal = 10.dp, vertical = 20.dp)
+            .fillMaxWidth()
+    ) {
+        Column {
+            Text(
+                text = "Daily Thought",
+                style = MaterialTheme.typography.headlineMedium,
+                color = TextWhite
+            )
+            Text(
+                text = "Meditation : 3-10 min",
+                color = TextWhite
+            )
+        }
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier
+                .size(40.dp)
+                .clip(CircleShape)
+                .background(
+                    ButtonBlue
+                )
+                .padding(10.dp)
+        ) {
+            Icon(
+                painter = painterResource(id = R.drawable.baseline_play_arrow_24),
+                contentDescription ="Play",
+                tint = Color.White,
+                modifier = Modifier.size(16.dp)
+            )
+        }
+
+    }
+
+}
 
 
 
