@@ -42,8 +42,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.devyash.jetpackcompose.R
+import com.devyash.jetpackcompose.models.BottomNavContent
 import com.devyash.jetpackcompose.models.Feature
 import com.devyash.jetpackcompose.standardQuadFromTo
+import com.devyash.jetpackcompose.ui.theme.AquaBlue
 import com.devyash.jetpackcompose.ui.theme.Beige1
 import com.devyash.jetpackcompose.ui.theme.Beige2
 import com.devyash.jetpackcompose.ui.theme.Beige3
@@ -74,37 +76,115 @@ fun HomeScreen() {
             GreetingSection()
             ChipSection(chips = listOf("Sweet Sleep", "Insomnia", "Depression"))
             CurrentMeditation()
-            FeaturesSection(features = listOf(
-                Feature(
-                    title = "Sleep meditation",
-                    R.drawable.baseline_headphones_24,
-                    BlueViolet1,
-                    BlueViolet2,
-                    BlueViolet3
-                ),
-                Feature(
-                    "Tips For Sleeping",
-                    R.drawable.baseline_videocam_24,
-                    LightGreen1,
-                    LightGreen2,
-                    LightGreen3
-                ),
-                Feature(
-                    "Night Island",
-                    R.drawable.baseline_headphones_24,
-                    OrangeYellow1,
-                    OrangeYellow2,
-                    OrangeYellow3
-                ),
-                Feature(
-                    "Calming Sound",
-                    R.drawable.baseline_headphones_24,
-                    Beige1,
-                    Beige2,
-                    Beige3
+            FeaturesSection(
+                features = listOf(
+                    Feature(
+                        title = "Sleep meditation",
+                        R.drawable.baseline_headphones_24,
+                        BlueViolet1,
+                        BlueViolet2,
+                        BlueViolet3
+                    ),
+                    Feature(
+                        "Tips For Sleeping",
+                        R.drawable.baseline_videocam_24,
+                        LightGreen1,
+                        LightGreen2,
+                        LightGreen3
+                    ),
+                    Feature(
+                        "Night Island",
+                        R.drawable.baseline_headphones_24,
+                        OrangeYellow1,
+                        OrangeYellow2,
+                        OrangeYellow3
+                    ),
+                    Feature(
+                        "Calming Sound",
+                        R.drawable.baseline_headphones_24,
+                        Beige1,
+                        Beige2,
+                        Beige3
+                    )
                 )
-            ))
+            )
+
         }
+        BottomNav(
+            items = listOf(
+                BottomNavContent("Home", R.drawable.baseline_home_24),
+                BottomNavContent("Headphones", R.drawable.baseline_headphones_24),
+                BottomNavContent("Video", R.drawable.baseline_videocam_24),
+                BottomNavContent("Chat", R.drawable.baseline_chat_24)
+            ), modifier = Modifier.align(Alignment.BottomCenter)
+        )
+    }
+}
+
+@Composable
+fun BottomNav(
+    items: List<BottomNavContent>,
+    modifier: Modifier = Modifier,
+    activeHighlightedColor: Color = ButtonBlue,
+    activeTextColor: Color = Color.White,
+    inactiveTextColor: Color = AquaBlue,
+    initialSelectedItem: Int = 0
+) {
+    var selectedItemIndex by remember {
+        mutableStateOf(initialSelectedItem)
+    }
+
+    Row(
+        horizontalArrangement = Arrangement.SpaceAround,
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = modifier
+            .fillMaxWidth()
+            .background(DeepBlue)
+            .padding(15.dp)
+    ) {
+        items.forEachIndexed { index, item ->
+            menuItem(
+                item = item,
+                isSelected = index == selectedItemIndex,
+                activeHighlightedColor = activeHighlightedColor,
+                activeTextColor = activeTextColor,
+                inactiveTextColor = inactiveTextColor
+            ) {
+                selectedItemIndex = index
+            }
+        }
+    }
+}
+
+@Composable
+fun menuItem(
+    item: BottomNavContent,
+    isSelected: Boolean = false,
+    activeHighlightedColor: Color = ButtonBlue,
+    activeTextColor: Color = Color.White,
+    inactiveTextColor: Color = AquaBlue,
+    onItemClick: () -> Unit
+) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+        modifier = Modifier.clickable { onItemClick() }
+    ) {
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier
+                .clip(RoundedCornerShape(10.dp))
+                .background(if (isSelected) activeHighlightedColor else Color.Transparent)
+                .padding(10.dp)
+        ) {
+            Icon(
+                painter = painterResource(id = item.iconId),
+                contentDescription = item.title,
+                tint = if (isSelected) activeTextColor else inactiveTextColor,
+                modifier = Modifier.size(20.dp)
+            )
+        }
+        Text(text = item.title, color = if (isSelected) activeTextColor else inactiveTextColor)
     }
 }
 
@@ -179,6 +259,7 @@ fun CurrentMeditation(
         modifier = Modifier
             .padding(15.dp)
             .clip(RoundedCornerShape(10.dp))
+            .background(color)
             .padding(horizontal = 10.dp, vertical = 20.dp)
             .fillMaxWidth()
     ) {
@@ -222,7 +303,8 @@ fun FeaturesSection(features: List<Feature>) {
         Text(
             text = "Features",
             style = MaterialTheme.typography.headlineMedium,
-            modifier = Modifier.padding(15.dp)
+            modifier = Modifier.padding(15.dp),
+            color = TextWhite
         )
     }
 
@@ -299,7 +381,7 @@ fun featureItem(feature: Feature) {
         ) {
             Text(
                 text = feature.title,
-                style = MaterialTheme.typography.headlineLarge,
+                style = MaterialTheme.typography.headlineMedium,
                 lineHeight = 26.sp,
                 modifier = Modifier.align(Alignment.TopStart),
                 color = TextWhite
@@ -308,7 +390,7 @@ fun featureItem(feature: Feature) {
                 painter = painterResource(id = feature.iconID), contentDescription = feature.title,
                 tint = Color.White, modifier = Modifier
                     .align(Alignment.BottomStart)
-                    .size(40.dp)
+                    .size(30.dp)
             )
             Text(text = "Start", color = TextWhite, fontSize = 14.sp,
                 fontWeight = FontWeight.Bold, modifier = Modifier

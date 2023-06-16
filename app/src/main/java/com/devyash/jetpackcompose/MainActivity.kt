@@ -64,6 +64,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.devyash.jetpackcompose.screens.QuoteDetail
 import com.devyash.jetpackcompose.screens.QuoteListScreen
+import com.devyash.jetpackcompose.ui.HomeScreen
 
 
 class MainActivity : ComponentActivity() {
@@ -98,6 +99,7 @@ class MainActivity : ComponentActivity() {
 //            }
 
 
+            HomeScreen()
         }
 
 
