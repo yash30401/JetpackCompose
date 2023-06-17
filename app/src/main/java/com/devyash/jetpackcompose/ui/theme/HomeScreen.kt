@@ -121,6 +121,7 @@ fun HomeScreen() {
     }
 }
 
+//Bottom Nav
 @Composable
 fun BottomNav(
     items: List<BottomNavContent>,
@@ -156,6 +157,7 @@ fun BottomNav(
     }
 }
 
+//MenuItem of meditation UI
 @Composable
 fun menuItem(
     item: BottomNavContent,
@@ -188,6 +190,7 @@ fun menuItem(
     }
 }
 
+//Greeting Section
 @Composable
 fun GreetingSection(
     name: String = "Yash"
@@ -220,6 +223,7 @@ fun GreetingSection(
     }
 }
 
+//Chip  Section
 @Composable
 fun ChipSection(chips: List<String>) {
     var selectedChipIndex by remember {
@@ -248,6 +252,7 @@ fun ChipSection(chips: List<String>) {
 
 }
 
+//Current Meditation
 @Composable
 fun CurrentMeditation(
     color: Color = LightRed
@@ -296,7 +301,7 @@ fun CurrentMeditation(
 
 }
 
-
+//Features Section
 @Composable
 fun FeaturesSection(features: List<Feature>) {
     Column(modifier = Modifier.fillMaxWidth()) {
@@ -319,6 +324,7 @@ fun FeaturesSection(features: List<Feature>) {
     }
 }
 
+//Feature Item
 @Composable
 fun featureItem(feature: Feature) {
     BoxWithConstraints(
