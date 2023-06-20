@@ -1,6 +1,7 @@
 package com.devyash.jetpackcompose
 
 import android.os.Bundle
+import android.text.Editable
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.ColorRes
@@ -62,8 +63,10 @@ import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.Navigation
 import com.devyash.jetpackcompose.screens.QuoteDetail
 import com.devyash.jetpackcompose.screens.QuoteListScreen
+import com.devyash.jetpackcompose.screens.navigation
 import com.devyash.jetpackcompose.ui.HomeScreen
 
 
@@ -100,6 +103,9 @@ class MainActivity : ComponentActivity() {
 
 
 //            HomeScreen()
+
+
+        navigation()
         }
 
 
@@ -260,6 +266,7 @@ private fun AnimateInCompose() {
 
     }
 }
+
 
 @Composable
 private fun CircularProgressBar(
