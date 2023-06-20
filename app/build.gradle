@@ -67,4 +67,8 @@ dependencies {
 
     //Gson
     implementation 'com.google.code.gson:gson:2.10.1'
+
+
+    def nav_version = "2.5.3"
+    implementation "androidx.navigation:navigation-compose:$nav_version"
 }

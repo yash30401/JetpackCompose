@@ -99,7 +99,7 @@ class MainActivity : ComponentActivity() {
 //            }
 
 
-            HomeScreen()
+//            HomeScreen()
         }
 
 
