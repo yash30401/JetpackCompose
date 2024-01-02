@@ -58,6 +58,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.TextUnit
@@ -105,13 +106,56 @@ class MainActivity : ComponentActivity() {
 //            HomeScreen()
 
 
-        navigation()
+//        navigation()
+
+//        greeting(name = "Yash")
         }
 
 
     }
 
 }
+
+
+@Composable
+private fun greeting(name:String){
+    Text(text = "Hi, $name")
+}
+
+@Preview(showSystemUi = true)
+@Composable
+private fun forPreview(){
+    greeting(name = "Yash")
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Old---------------------------------------------------
 
 var counter = 0
 
