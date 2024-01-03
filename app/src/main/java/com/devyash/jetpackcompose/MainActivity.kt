@@ -20,10 +20,13 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -33,13 +36,16 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -51,8 +57,11 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.res.painterResource
@@ -113,6 +122,7 @@ class MainActivity : ComponentActivity() {
 //        navigation()
 
 //        greeting(name = "Yash")
+            greeting(name = "Yash")
         }
 
 
@@ -121,51 +131,114 @@ class MainActivity : ComponentActivity() {
 }
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun greeting(name:String){
-    Text(text = "Hi, $name",
-        modifier = Modifier.fillMaxWidth().background(Color.Green).padding(10.dp),
-        fontSize = 30.sp,
-        color = Color.Red,
-        fontStyle = FontStyle.Italic,
-        fontWeight = FontWeight.ExtraBold,
-        fontFamily = FontFamily.Serif,
-        textDecoration = TextDecoration.Underline,
-        textAlign = TextAlign.Center
-    )
-}
+private fun greeting(name: String) {
+    var name by remember {
+        mutableStateOf("")
+    }
+    var names by remember {
+        mutableStateOf(listOf<String>())
+    }
+    Column(modifier = Modifier
+        .fillMaxSize()
+        .padding(10.dp)) {
+        Row(modifier = Modifier.fillMaxWidth()) {
+            OutlinedTextField(modifier = Modifier.width(250.dp),value = name, onValueChange = {
+                name = it
+            })
+            Spacer(modifier = Modifier.width(16.dp))
+            Button(onClick = {
+                if(name.isNotBlank()){
+                    names = names + name
+                    name = ""
+                }
+            }) {
+                Text(text = "Add")
+            }
+        }
+
+        LazyColumn(Modifier.padding(15.dp)){
+            items(names){
+                Text(text = it, fontSize = 25.sp)
+                Divider(thickness = 1.dp)
+                Spacer(modifier = Modifier.height(10.dp))
+            }
+        }
+    }
+
+//    var count by remember {
+//        mutableStateOf(0)
+//    }
+//    Column(
+//        modifier = Modifier.fillMaxSize(),
+//        horizontalAlignment = Alignment.CenterHorizontally,
+//        verticalArrangement = Arrangement.Center
+//    ) {
+//
+//        Text(text = count.toString(), fontSize = 30.sp)
+//        Button(onClick = {
+//            count++
+//        }) {
+//            Text(text = "Increase")
+//        }
+
+//        Text(
+//            text = "Hi, $name",
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .background(Color.Green)
+//                .padding(10.dp)
+//                .background(Color.Blue),
+//            fontSize = 30.sp,
+//            color = Color.Red,
+//            fontStyle = FontStyle.Italic,
+//            fontWeight = FontWeight.ExtraBold,
+//            fontFamily = FontFamily.Serif,
+//            textDecoration = TextDecoration.Underline,
+//            textAlign = TextAlign.Center
+//        )
+//
+//        Text(
+//            modifier = Modifier.fillMaxWidth(),
+//            text = "Hi, How are u doing",
+//            fontSize = 30.sp,
+//            color = Color.Red,
+//            fontStyle = FontStyle.Italic,
+//            fontWeight = FontWeight.ExtraBold,
+//            fontFamily = FontFamily.Serif,
+//            textDecoration = TextDecoration.Underline,
+//            textAlign = TextAlign.Center
+//        )
+//
+//        Box(
+//            modifier = Modifier
+//                .background(Color.Red)
+//                .width(50.dp)
+//                .height(50.dp),
+//            contentAlignment = Alignment.Center
+//        ) {
+//
+//            Image(
+//                painter = painterResource(id = R.drawable.baseline_casino_24),
+//                contentDescription = ""
+//            )
+//        }
+//        Button(onClick = { }) {
+//            Text(text = "Hi!")
+//        }
+
+    }
+
+
+
 
 @Preview(showSystemUi = true)
 @Composable
-private fun forPreview(){
+private fun forPreview() {
     greeting(name = "Yash")
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // Old---------------------------------------------------
