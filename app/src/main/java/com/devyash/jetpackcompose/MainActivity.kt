@@ -1,6 +1,7 @@
 package com.devyash.jetpackcompose
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import androidx.activity.ComponentActivity
@@ -39,6 +40,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Search
@@ -48,11 +50,13 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TopAppBar
@@ -87,17 +91,59 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.Navigation
+import com.devyash.jetpackcompose.screens.LoginActivity
 import com.devyash.jetpackcompose.screens.QuoteDetail
 import com.devyash.jetpackcompose.screens.QuoteListScreen
 import com.devyash.jetpackcompose.screens.navigation
 import com.devyash.jetpackcompose.ui.HomeScreen
+import com.devyash.jetpackcompose.ui.theme.JetpackComposeTheme
 
 
 class MainActivity : ComponentActivity() {
 
+    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            JetpackComposeTheme {
+                Scaffold(topBar = {
+                    TopAppBar(
+                        title = {
+                            Text(
+                                text = "Demo App",
+                                modifier = Modifier.padding(10.dp, 0.dp, 0.dp, 0.dp)
+                            )
+                        },
+                        navigationIcon = {
+                            IconButton(onClick = {}) {
+                                Icon(Icons.Filled.Menu, contentDescription = "")
+                            }
+                        },
+                        actions = {
+                            IconButton(onClick = {}) {
+                                Icon(Icons.Filled.Search, contentDescription = "")
+                            }
+                            IconButton(onClick = {}) {
+                                Icon(Icons.Filled.Notifications, contentDescription = "")
+                            }
+                        }
+                    )
+                }, floatingActionButton = {
+                    FloatingActionButton(onClick = {
+
+                    }) {
+                        Icon(Icons.Filled.Add, contentDescription = "")
+                    }
+                },
+                    content = {
+                        showSwitch()
+                        LoginActivity().LoginScreen(welcomeMessage = "Hi, Welcome Here")
+                    }
+                )
+            }
+
+        }
 //            Greeting("Android")
 //            cardInCompose(
 //                R.drawable.baseline_chat_24,
@@ -132,8 +178,6 @@ class MainActivity : ComponentActivity() {
 
 //        greeting(name = "Yash")
 //            greeting(name = "Yash")
-            toolbar()
-        }
 
 
     }
@@ -242,43 +286,21 @@ private fun greeting(name: String) {
 
 }
 
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun toolbar() {
-    Scaffold(topBar = {
-        TopAppBar(
-            title = {
-                Text(
-                    text = "Demo App",
-                    modifier = Modifier.padding(10.dp, 0.dp, 0.dp, 0.dp)
-                )
-            },
-            navigationIcon = {
-                IconButton(onClick = {}){
-                    Icon(Icons.Filled.Menu, contentDescription = "")
-                }
-            },
-            actions = {
-                IconButton(onClick = {}){
-                    Icon(Icons.Filled.Search, contentDescription = "")
-                }
-                IconButton(onClick = {}){
-                    Icon(Icons.Filled.Notifications, contentDescription = "")
-                }
-            }
-        )
+fun showSwitch(modifier: Modifier = Modifier) {
+    var checkedOrNot by remember {
+        mutableStateOf(false)
     }
-    ) {
-
-    }
+    Switch(modifier = modifier, checked = checkedOrNot, onCheckedChange = {
+        checkedOrNot = it
+    })
 }
 
 @Preview(showSystemUi = true)
 @Composable
 private fun forPreview() {
 //    greeting(name = "Yash")
-    toolbar()
+    showSwitch()
 }
 
 
