@@ -1,5 +1,6 @@
 package com.devyash.jetpackcompose
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
 import androidx.activity.ComponentActivity
@@ -38,16 +39,24 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -122,7 +131,8 @@ class MainActivity : ComponentActivity() {
 //        navigation()
 
 //        greeting(name = "Yash")
-            greeting(name = "Yash")
+//            greeting(name = "Yash")
+            toolbar()
         }
 
 
@@ -140,16 +150,18 @@ private fun greeting(name: String) {
     var names by remember {
         mutableStateOf(listOf<String>())
     }
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .padding(10.dp)) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(10.dp)
+    ) {
         Row(modifier = Modifier.fillMaxWidth()) {
-            OutlinedTextField(modifier = Modifier.width(250.dp),value = name, onValueChange = {
+            OutlinedTextField(modifier = Modifier.width(250.dp), value = name, onValueChange = {
                 name = it
             })
             Spacer(modifier = Modifier.width(16.dp))
             Button(onClick = {
-                if(name.isNotBlank()){
+                if (name.isNotBlank()) {
                     names = names + name
                     name = ""
                 }
@@ -158,8 +170,8 @@ private fun greeting(name: String) {
             }
         }
 
-        LazyColumn(Modifier.padding(15.dp)){
-            items(names){
+        LazyColumn(Modifier.padding(15.dp)) {
+            items(names) {
                 Text(text = it, fontSize = 25.sp)
                 Divider(thickness = 1.dp)
                 Spacer(modifier = Modifier.height(10.dp))
@@ -228,16 +240,45 @@ private fun greeting(name: String) {
 //            Text(text = "Hi!")
 //        }
 
+}
+
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun toolbar() {
+    Scaffold(topBar = {
+        TopAppBar(
+            title = {
+                Text(
+                    text = "Demo App",
+                    modifier = Modifier.padding(10.dp, 0.dp, 0.dp, 0.dp)
+                )
+            },
+            navigationIcon = {
+                IconButton(onClick = {}){
+                    Icon(Icons.Filled.Menu, contentDescription = "")
+                }
+            },
+            actions = {
+                IconButton(onClick = {}){
+                    Icon(Icons.Filled.Search, contentDescription = "")
+                }
+                IconButton(onClick = {}){
+                    Icon(Icons.Filled.Notifications, contentDescription = "")
+                }
+            }
+        )
     }
+    ) {
 
-
-
+    }
+}
 
 @Preview(showSystemUi = true)
 @Composable
 private fun forPreview() {
-    greeting(name = "Yash")
-
+//    greeting(name = "Yash")
+    toolbar()
 }
 
 
