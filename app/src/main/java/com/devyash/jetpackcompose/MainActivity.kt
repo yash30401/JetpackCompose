@@ -41,6 +41,8 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Face
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Search
@@ -48,6 +50,7 @@ import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
@@ -177,36 +180,63 @@ class MainActivity : ComponentActivity() {
 //        greeting(name = "Yash")
 //            greeting(name = "Yash")
 
-                learningStateConcept()
+                learningStateHoisting()
             }
 
         }
 
 
-
     }
 
 }
 
 @Composable
-fun learningStateConcept(){
+fun learningStateHoisting() {
     var count by remember {
         mutableStateOf(0)
     }
-    Column(Modifier.fillMaxSize()) {
-        Text(text = "You have send $count Notificattions")
-        Button(onClick = { count++}) {
-            Text(text = "Send Notification")
-        }
+    Column(
+        Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        learningStateConcept(count, {
+            count++
+        })
+        notifCard(count)
     }
+
+
 }
 
 @Composable
-fun learningStateHoisting(){
-
+fun learningStateConcept(value: Int, increment: () -> Unit) {
+    Text(text = "You have send $value Notificattions")
+    Button(onClick = { increment() }) {
+        Text(text = "Send Notification")
+    }
 }
 
-fun
+
+@Composable
+fun notifCard(value: Int) {
+    Card(
+        modifier = Modifier
+            .padding(10.dp)
+            .width(250.dp),
+        elevation = CardDefaults.cardElevation(4.dp)
+    ) {
+        Row(
+            Modifier
+                .padding(10.dp)
+                .width(250.dp),
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
+            Icon(imageVector = Icons.Filled.Favorite, contentDescription = "")
+            Text(text = "Notifications till now $value")
+        }
+    }
+}
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -326,10 +356,8 @@ private fun forPreview() {
 //    greeting(name = "Yash")
 //    showSwitch()
 //        learningStateConcept()
-    learningStateConcept()
+    learningStateHoisting()
 }
-
-
 
 
 // Old---------------------------------------------------
