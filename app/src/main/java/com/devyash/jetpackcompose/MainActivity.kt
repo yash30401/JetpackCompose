@@ -107,44 +107,42 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             JetpackComposeTheme {
-                Scaffold(topBar = {
-                    TopAppBar(
-                        title = {
-                            Text(
-                                text = "Demo App",
-                                modifier = Modifier.padding(10.dp, 0.dp, 0.dp, 0.dp)
-                            )
-                        },
-                        navigationIcon = {
-                            IconButton(onClick = {}) {
-                                Icon(Icons.Filled.Menu, contentDescription = "")
-                            }
-                        },
-                        actions = {
-                            IconButton(onClick = {}) {
-                                Icon(Icons.Filled.Search, contentDescription = "")
-                            }
-                            IconButton(onClick = {}) {
-                                Icon(Icons.Filled.Notifications, contentDescription = "")
-                            }
-                        }
-                    )
-                }, floatingActionButton = {
-                    FloatingActionButton(onClick = {
+//                Scaffold(topBar = {
+//                    TopAppBar(
+//                        title = {
+//                            Text(
+//                                text = "Demo App",
+//                                modifier = Modifier.padding(10.dp, 0.dp, 0.dp, 0.dp)
+//                            )
+//                        },
+//                        navigationIcon = {
+//                            IconButton(onClick = {}) {
+//                                Icon(Icons.Filled.Menu, contentDescription = "")
+//                            }
+//                        },
+//                        actions = {
+//                            IconButton(onClick = {}) {
+//                                Icon(Icons.Filled.Search, contentDescription = "")
+//                            }
+//                            IconButton(onClick = {}) {
+//                                Icon(Icons.Filled.Notifications, contentDescription = "")
+//                            }
+//                        }
+//                    )
+//                }, floatingActionButton = {
+//                    FloatingActionButton(onClick = {
+//
+//                    }) {
+//                        Icon(Icons.Filled.Add, contentDescription = "")
+//                    }
+//                },
+//                    content = {
+////                        showSwitch()
+////                        LoginActivity().LoginScreen(welcomeMessage = "Hi, Welcome Here")
+//                    }
+//                )
 
-                    }) {
-                        Icon(Icons.Filled.Add, contentDescription = "")
-                    }
-                },
-                    content = {
-                        showSwitch()
-                        LoginActivity().LoginScreen(welcomeMessage = "Hi, Welcome Here")
-                    }
-                )
-            }
-
-        }
-//            Greeting("Android")
+                //            Greeting("Android")
 //            cardInCompose(
 //                R.drawable.baseline_chat_24,
 //                "Yashveer Singh",
@@ -179,10 +177,36 @@ class MainActivity : ComponentActivity() {
 //        greeting(name = "Yash")
 //            greeting(name = "Yash")
 
+                learningStateConcept()
+            }
+
+        }
+
+
 
     }
 
 }
+
+@Composable
+fun learningStateConcept(){
+    var count by remember {
+        mutableStateOf(0)
+    }
+    Column(Modifier.fillMaxSize()) {
+        Text(text = "You have send $count Notificattions")
+        Button(onClick = { count++}) {
+            Text(text = "Send Notification")
+        }
+    }
+}
+
+@Composable
+fun learningStateHoisting(){
+
+}
+
+fun
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -300,8 +324,12 @@ fun showSwitch(modifier: Modifier = Modifier) {
 @Composable
 private fun forPreview() {
 //    greeting(name = "Yash")
-    showSwitch()
+//    showSwitch()
+//        learningStateConcept()
+    learningStateConcept()
 }
+
+
 
 
 // Old---------------------------------------------------
